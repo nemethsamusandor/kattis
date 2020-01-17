@@ -63,7 +63,12 @@ public class LostAnimal
         }
 
         // Print answer
-        System.out.println((!works) ? "impossible" : (ambiguous) ? "ambiguous" : "unique");
+        if (!works)
+            System.out.println("impossible");
+        else if (ambiguous)
+            System.out.println("ambiguous");
+        else
+            System.out.println("unique");
     }
 
     static int manipulateMap(int i, List<String> basket, Map<String, List<Integer>> map, int minMax, boolean max) {
