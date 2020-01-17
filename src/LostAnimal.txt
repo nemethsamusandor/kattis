@@ -1,0 +1,45 @@
+3
+3
+0 chocolate
+1 icecream
+2 cookies
+3
+chocolate
+cookies
+icecream
+
+-> impossible
+
+3
+4
+0 chocolate
+1 icecream
+2 cookies
+2 chocolate
+3
+chocolate
+icecream
+cookies
+
+-> unique
+
+3
+10
+0 tomatoes
+0 cucumber
+1 tomatoes
+2 tomatoes
+2 cucumber
+1 mustard
+0 salt
+2 salad
+2 salt
+2 mustard
+5
+tomatoes
+cucumber
+salad
+mustard
+salt
+
+-> ambiguous
