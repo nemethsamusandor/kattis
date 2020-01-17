@@ -5,12 +5,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Java solution of Abandoned Animal problem,
+ * based on solution of https://github.com/mpfeifer1
+ *
+ * @author Sandor Nemeth (nemethsamusandor)
+ */
 public class LostAnimal
 {
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
 
-        int stores = s.nextInt(); // Groceries
+        int stores = s.nextInt(); // Stores in the town
         int goodsAmount = s.nextInt(); // Number of list of goods
 
         Map<String, List<Integer>> map = new HashMap<>(stores);
@@ -33,66 +39,53 @@ public class LostAnimal
             basket.add(s.next());
         }
 
+
         int max = 0;
         for (int i = 0; i < itemsNumbers; i++) {
-            String currentArticle = basket.get(i);
-            List<Integer> rem = new ArrayList<>();
-            for (Integer curentStoreNumber : map.get(currentArticle)){
-                if (curentStoreNumber < max) {
-                    rem.add(curentStoreNumber);
-                }
-            }
-
-            for (Integer temp : rem) {
-                map.get(currentArticle).remove(temp);
-            }
-
-            if (map.get(currentArticle).size() > 0) {
-                max = Math.max(Collections.min(map.get(currentArticle)), max);
-            }
+            max = manipulateMap(i, basket, map, max, true);
         }
 
         int min = Integer.MAX_VALUE;
         for (int i = itemsNumbers - 1; i>=0; i--){
-            String currentArticle = basket.get(i);
-            List<Integer> rem = new ArrayList<>();
-            for (Integer curentStoreNumber : map.get(currentArticle)){
-                if (curentStoreNumber > min) {
-                    rem.add(curentStoreNumber);
-                }
-            }
-
-            for (Integer temp : rem) {
-                map.get(currentArticle).remove(temp);
-            }
-
-            if (map.get(currentArticle).size() > 0) {
-                min = Math.min(Collections.max(map.get(currentArticle)), min);
-            }
-
+            min = manipulateMap(i, basket, map, min, false);
         }
 
         // Find answer
         boolean works = true;
-        boolean ambig = false;
+        boolean ambiguous = false;
         for(String temp : basket) {
-            if(map.get(temp).size() < 1) {
+            if(map.get(temp).isEmpty()) {
                 works = false;
             }
             if(map.get(temp).size() > 1) {
-                ambig = true;
+                ambiguous = true;
             }
         }
 
         // Print answer
-        if(!works) {
-            System.out.println("impossible");
+        System.out.println((!works) ? "impossible" : (ambiguous) ? "ambiguous" : "unique");
+    }
+
+    static int manipulateMap(int i, List<String> basket, Map<String, List<Integer>> map, int minMax, boolean max) {
+        String currentArticle = basket.get(i);
+        List<Integer> rem = new ArrayList<>();
+        for (Integer currentStoreNumber : map.get(currentArticle)){
+            if (max && currentStoreNumber < minMax
+            || !max && currentStoreNumber > minMax) {
+                rem.add(currentStoreNumber);
+            }
         }
-        else if(ambig) {
-            System.out.println("ambiguous");
+
+        for (Integer temp : rem) {
+            map.get(currentArticle).remove(temp);
         }
-        else {
-            System.out.println("unique" );
+
+        if (max && !map.get(currentArticle).isEmpty()) {
+            return Math.max(Collections.min(map.get(currentArticle)), minMax);
         }
+        else if (!max && !map.get(currentArticle).isEmpty()) {
+            return Math.min(Collections.max(map.get(currentArticle)), minMax);
+        }
+        return minMax;
     }
 }
