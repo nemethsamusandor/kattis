@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * Java solution of Abandoned Animal problem,
- * based on solution of https://github.com/mpfeifer1
+ * based on solution of https://github.com/mpfeifer1/Kattis/blob/master/abandonedanimal.cpp
  *
  * @author Sandor Nemeth (nemethsamusandor)
  */
