@@ -4,6 +4,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args)
     {
+/*
         Kattio io = new Kattio(System.in);
 
         int n = io.getInt();
@@ -30,12 +31,12 @@ public class Main {
             }
         }
 
-        boolean odd = false;
+        boolean od = false;
         for(int i = 0; i < n; i++) {
             if(d.get(i) < 0) {
                 for(int j : adj.get(i)) {
                     if(find(d,i) == find(d,j)) {
-                        odd = true;
+                        od = true;
                     }
                 }
             }
@@ -51,7 +52,7 @@ public class Main {
         }
 
         components--;
-        if(!odd) components++;
+        if(!od) components++;
 
         io.println(components);
 
@@ -98,5 +99,6 @@ public class Main {
         {
             return i2;
         }
+*/
     }
 }
